@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Phonetics Trainer</title>
+    <link rel="stylesheet" href="phoneticsTrainer.css">
+</head>
+<body>
+
+    <h1 id="002">Phonetic alphabet trainer</h1>
+
+    <input
+            id="mainInput"
+            type="text"
+            placeholder="type your thing!"
+            onkeyup="phonetics()"
+            autocomplete="off"
+    >
+    <br>
+    <div id="timer" onclick="startTimer()">click to Start</div>
+    <div id="Results"></div>
+    <div id="stats"></div>
+    <p id="errors" ></p>
+
+
+    <script src="phonetics.js"></script>
+
+
+</body>
+</html>

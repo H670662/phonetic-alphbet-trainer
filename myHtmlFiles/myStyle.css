@@ -1,0 +1,94 @@
+
+/* General Styles */
+body {
+    background-color: #f0f8ff;
+    font-family: Arial, sans-serif;
+    color: #333;
+    text-align: center;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Heading */
+#002 {
+    font-size: 2.5em;
+    color: #4b0082;
+    margin-bottom: 20px;
+}
+
+/* Buttons */
+button {
+    background-color: #4b0082;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #6a5acd;
+}
+
+/* Image */
+#003 {
+    max-width: 50%;
+    height: auto;
+    margin: 20px auto;
+    display: block;
+    transition: max-width 0.5s ease;
+    border: 5px solid #4b0082;
+    border-radius: 10px;
+}
+
+/* Input Field */
+#004 {
+    padding: 12px;
+    font-size: 1em;
+    width: 300px;
+    border: 2px solid #4b0082;  /* Matches the button color */
+    border-radius: 5px;
+    color: #4b0082;             /* Text color matches button background */
+    background-color: #fff;
+    margin: 10px auto;
+    display: block;
+}
+
+#004:focus {
+    outline: none;
+    border-color: #6a5acd;      /* Matches the hover color of buttons */
+    box-shadow: 0 0 5px #6a5acd; /* Subtle glow effect on focus */
+}
+
+#004::placeholder {
+    color: #aaa;                /* Placeholder text color */
+}
+
+/* Paragraphs */
+#005, #006, #007 {
+    font-size: 1.2em;
+    margin: 20px auto;
+    max-width: 600px;
+    line-height: 1.5em;
+}
+
+/* Hidden Paragraph */
+#005 {
+    display: none;
+}
+
+/* New Style Class */
+.new-style {
+    color: #4b0082;
+    font-weight: bold;
+}
+
+/* Additional Styles */
+#006 {
+    padding: 10px;
+    background-color: #e6e6fa;
+    border-radius: 5px;
+}
+
