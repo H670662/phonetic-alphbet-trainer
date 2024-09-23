@@ -85,8 +85,8 @@ h1 {
     margin-top: 10px;
 }
 
-/* Footer (if needed) */
-footer {
+/* Footer // restart */
+#restart {
     text-align: center;
     padding: 20px;
     background-color: #007BFF;

@@ -1,4 +1,6 @@
 const phoneticAlphabet = {
+
+    c1: ["aaa"],
     a: ["alpha", "alfa"],
     b: ["bravo"],
     c: ["charlie"],
@@ -42,26 +44,27 @@ let characterCounter = 0;
 let input = "";
 let elapsed, minutes, seconds;
 let runningTimer = false;
+let timerInterval = null;
+let totalTime = "";
 
 
-
-window.phonetics = function() {
-
-    input = document.getElementById("mainInput").value.trim();
-    if (input === ' ') {
-        document.getElementById("Results").innerHTML += input
+window.phonetics = function () {
+    if (document.getElementById("mainInput").value === ' ') {
         document.getElementById("mainInput").value = null;
     }
+
+    input = document.getElementById("mainInput").value.trim();
+
     input = checkPhoneticMatch(input);
-    if (!(input === null)) {
-        document.getElementById("Results").innerHTML += input
+    if (input !== null) {
+        document.getElementById("Results").innerHTML += input;
         document.getElementById("mainInput").value = null;
         console.log(characterCounter);
     }
 
 }
 
-window.timerfunction = function() {
+window.timerfunction = function () {
 
 }
 
@@ -77,51 +80,78 @@ function checkPhoneticMatch(param) {
         if (variants.includes(input)) {
             characterCounter++;
             document.getElementById("stats").innerHTML = "Characters: " + characterCounter +
-                "<br>Characters per minute: " + calculateCPS(characterCounter).toFixed(2);
+                "<br>Characters per second: " + calculateCPS(characterCounter).toFixed(2);
             return key;
         }
     }
     return null;
 }
 
+document.body.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+        restartTimer();
+        document.getElementById("mainInput").value = null;
+    } if (e.key === "Backspace") {
+        document.getElementById("mainInput").value = null;
+    } if (e.key === " ") {
+        document.getElementById("Results").innerHTML += ' ';
 
+    }
+
+
+
+    else if (!runningTimer) {
+        document.getElementById("timer").innerHTML = "0:60";
+        const display = document.getElementById('timer');
+        startStopwatch(display);
+    }
+});
+
+function restartTimer() {
+    if (timerInterval) {
+        clearInterval(timerInterval);  // Clear the previous interval if any
+    }
+    runningTimer = false;
+    characterCounter = 0;
+    totalTime = 60;
+    document.getElementById("Results").innerHTML = "";
+    document.getElementById("stats").innerHTML = "Reset";
+    document.getElementById("timer").innerHTML = "click to Start";// Reset stats
+    console.log("Timer restarted");
+}
 
 function startStopwatch(display) {
     if (runningTimer) {
-        return;
 
     } else {
         runningTimer = true;
-        let startTime = Date.now(); // Capture the starting time
+        totalTime = 60;  // Set total time to 60 seconds for a 1-minute timer
 
-        const interval = setInterval(function () {
-            // Calculate total elapsed time in seconds
-            elapsed = Math.floor((Date.now() - startTime) / 1000);
+        timerInterval = setInterval(function () {
+            console.log(totalTime--);  // Decrease the time by 1 second each time the interval runs
 
-            let minutes = Math.floor(elapsed / 60);
-            let seconds = elapsed % 60;
+            // Calculate minutes and seconds
+            let minutes = Math.floor(totalTime / 60);
+            let seconds = totalTime % 60;
 
-            // If seconds are less than 10, add a leading zero
+            //If seconds are less than 10, add a leading zero
             seconds = seconds < 10 ? '0' + seconds : seconds;
 
-            // Display the stopwatch time in the desired element
+            // Display the countdown time in the desired element
             display.innerHTML = minutes + ":" + seconds;
-        }, 1000);  // Update every second (1000 ms)
 
-        return interval; // Return the interval ID so it can be stopped if needed
+            // Stop the timer when it reaches 0
+            if (totalTime <= 0) {
+                clearInterval(timerInterval);
+                runningTimer = false;
+                display.innerHTML = "Time's up!";// Optionally display a message
+                alert("your cpm is: " + calculateCPS(characterCounter).toFixed(2));
+            }
+        }, 1000);  // Update every second (1000 ms)
     }
 }
 
-// Example usage: Start the stopwatch and display it in an element with id="timer"
-window.onclick = function () {
-    const display = document.getElementById('timer'); // Get the element to display the stopwatch
-    startStopwatch(display); // Start the stopwatch
-};
 
 function calculateCPS(characters) {
-    if (elapsed > 0) {
-        return characters / elapsed * 60;
-    } else {
-        return 0; // Avoid division by zero
-    }
+    return characters / 60;
 }

@@ -9,20 +9,22 @@
 
     <h1 id="002">Phonetic alphabet trainer</h1>
 
+    <div id="Challenge"></div>
     <input
             id="mainInput"
             type="text"
             placeholder="type your thing!"
             onkeyup="phonetics()"
+            onkeydown="startTimer()"
             autocomplete="off"
     >
     <br>
-    <div id="timer" onclick="startTimer()">click to Start</div>
+    <div id="timer" onclick="startTimer()">Start typing!</div>
     <div id="Results"></div>
     <div id="stats"></div>
     <p id="errors" ></p>
 
-
+    <button id ="restart" onclick="restartTimer()">Restart<br>(esc)</button>
     <script src="phonetics.js"></script>
 
 
